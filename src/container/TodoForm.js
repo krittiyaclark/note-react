@@ -5,7 +5,7 @@ import '../App.css';
 class AddForm extends Component {
 	state = {
 		content: '',
-		error: true,
+		validation: false,
 	};
 
 	handleChange = (event) => {
@@ -17,25 +17,39 @@ class AddForm extends Component {
 	handleSubmit = (event) => {
 		event.preventDefault();
 
-		if (this.state.content === '') {
-			this.setState({ error: true });
-			// return;
-		} else if (this.state.content !== '') {
+		// if (this.state.content === '') {
+		// 	this.setState({ error: true });
+		// 	return;
+		// } else if (this.state.content !== '') {
+		// 	this.props.addTodo(this.state);
+		// } else if (this.state.content !== '') {
+		// 	this.props.addTodo(this.state.content);
+		// }
+		// this.setState({
+		// 	content: '',
+		// 	error: false,
+		// });
+		const checkValidation = this.state.content;
+		if (checkValidation === '') {
+			this.setState({ validation: true });
+			return;
+		} else if (checkValidation !== '') {
 			this.props.addTodo(this.state);
-		} else if (this.state.content !== '') {
-			this.props.addTodo(this.state.content);
 		}
 		this.setState({
 			content: '',
-			error: false,
 		});
 	};
 
+	// checkValidation = () => {
+	// 	if (this.state.content === '') {
+	// 	} else if (this.state.content !== '') this.setState({ validation: true });
+	// };
+
 	render() {
-		// let { error } = this.state;
-		// if (error)
-		// {
-		// 	return <p>Form is not valid</p>
+		let { validation } = this.state;
+		// if (validation) {
+		// 	return <p>Form is not valid</p>;
 		// }
 		return (
 			<>
@@ -44,13 +58,13 @@ class AddForm extends Component {
 						type='text'
 						onChange={this.handleChange}
 						value={this.state.content}
-						// className={error ? 'error' : ''}
+						// className={validation ? 'error' : ''}
 						required
 					/>
+					<button type='submit'>Add</button>
 				</form>
-				<button onClick={this.handleSubmit}>Add</button>
 
-				{/* <p>{error}</p> */}
+				{validation ? <p>Please enter your todo</p> : null}
 			</>
 		);
 	}
