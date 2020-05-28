@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import '../App.css';
+import './TodoForm.css';
 
 class AddForm extends Component {
 	state = {
@@ -17,18 +17,6 @@ class AddForm extends Component {
 	handleSubmit = (event) => {
 		event.preventDefault();
 
-		// if (this.state.content === '') {
-		// 	this.setState({ error: true });
-		// 	return;
-		// } else if (this.state.content !== '') {
-		// 	this.props.addTodo(this.state);
-		// } else if (this.state.content !== '') {
-		// 	this.props.addTodo(this.state.content);
-		// }
-		// this.setState({
-		// 	content: '',
-		// 	error: false,
-		// });
 		const checkValidation = this.state.content;
 		if (checkValidation === '') {
 			this.setState({ validation: true });
@@ -38,19 +26,21 @@ class AddForm extends Component {
 		}
 		this.setState({
 			content: '',
+			validation: !checkValidation,
 		});
 	};
 
-	// checkValidation = () => {
-	// 	if (this.state.content === '') {
-	// 	} else if (this.state.content !== '') this.setState({ validation: true });
-	// };
-
 	render() {
 		let { validation } = this.state;
-		// if (validation) {
-		// 	return <p>Form is not valid</p>;
-		// }
+		let checkValidationInput = null;
+
+		if (validation) {
+			checkValidationInput = (
+				<span className='error'>
+					{validation ? <p>Please enter your todo</p> : null}
+				</span>
+			);
+		}
 		return (
 			<>
 				<form onSubmit={this.handleSubmit} noValidate>
@@ -58,13 +48,13 @@ class AddForm extends Component {
 						type='text'
 						onChange={this.handleChange}
 						value={this.state.content}
-						// className={validation ? 'error' : ''}
+						className={validation ? 'error' : ''}
 						required
 					/>
 					<button type='submit'>Add</button>
 				</form>
 
-				{validation ? <p>Please enter your todo</p> : null}
+				{checkValidationInput}
 			</>
 		);
 	}
