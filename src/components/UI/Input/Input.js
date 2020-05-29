@@ -1,18 +1,18 @@
 import React from 'react';
 
-import './TodoForm.css';
+import './Input.css';
 
-const AddForm = ({ change, submit, value, validation }) => (
+const input = ({ change, submit, value, validation }) => (
 	<form onSubmit={submit} noValidate>
 		<input
 			type='text'
 			onChange={change}
 			value={value}
-			className={validation ? 'error' : ''}
+			className={validation}
 			required
 		/>
 		<button type='submit'>Add</button>
 	</form>
 );
 
-export default AddForm;
+export default input;
