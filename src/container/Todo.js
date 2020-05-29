@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import TodoApp from '../components/TodoApp';
-import TodoForm from './TodoForm';
+import Input from '../components/UI/Input/Input';
 
 class Todo extends Component {
 	state = {
@@ -20,11 +20,10 @@ class Todo extends Component {
 	};
 
 	addTodo = (todo) => {
-		todo.id = Math.random();
-		let newTodos = [...this.state.todos, todo];
-		this.setState({
-			todos: newTodos,
-		});
+		const newTodo = { id: Math.random(), content: todo };
+
+		const newTodos = [...this.state.todos, newTodo];
+		this.setState({ todos: newTodos });
 	};
 
 	handleChange = (event) => {
@@ -40,38 +39,40 @@ class Todo extends Component {
 		if (checkValidation === '') {
 			this.setState({ validation: true });
 			return;
-		} else if (checkValidation !== '') {
-			this.addTodo(this.state);
 		}
+		this.addTodo(this.state.content);
 		this.setState({
 			content: '',
-			validation: !checkValidation,
+			validation: false,
 		});
 	};
 
 	render() {
 		let { validation } = this.state;
-		let checkValidationInput = null;
 
-		if (validation) {
-			checkValidationInput = (
-				<span className='error'>
-					{validation ? <p>Please enter your todo</p> : null}
-				</span>
-			);
-		}
+		// let checkValidationInput = null;
+
+		// if (validation) {
+		// 	checkValidationInput = (
+		// 		<span className='error'>
+		// 			{validation ? <p>Please enter your todo</p> : null}
+		// 		</span>
+		// 	);
+		// }
+
 		return (
 			<div className='todo-app container'>
 				<h1 className='center blue-text'>Todo's</h1>
 				<TodoApp todos={this.state.todos} removeTodo={this.removeTodo} />
-				<TodoForm
+				<Input
 					addTodo={this.addTodo}
 					submit={this.handleSubmit}
 					change={this.handleChange}
+					validation={validation ? 'error' : null}
 					value={this.state.content}
 				/>
 
-				{checkValidationInput}
+				{/* {checkValidationInput} */}
 			</div>
 		);
 	}
