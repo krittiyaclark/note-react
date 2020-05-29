@@ -19,14 +19,6 @@ class Todo extends Component {
 		});
 	};
 
-	// addTodo = (todo) => {
-	// 	todo.id = Math.random();
-	// 	let newTodos = [...this.state.todos, todo];
-	// 	this.setState({
-	// 		todos: newTodos,
-	// 	});
-	// };
-
 	addTodo = (todo) => {
 		const newTodo = { id: Math.random(), content: todo };
 
@@ -57,17 +49,16 @@ class Todo extends Component {
 
 	render() {
 		let { validation } = this.state;
-		let { todos } = this.state;
 
-		let checkValidationInput = null;
+		// let checkValidationInput = null;
 
-		if (validation) {
-			checkValidationInput = (
-				<span className='error'>
-					{validation ? <p>Please enter your todo</p> : null}
-				</span>
-			);
-		}
+		// if (validation) {
+		// 	checkValidationInput = (
+		// 		<span className='error'>
+		// 			{validation ? <p>Please enter your todo</p> : null}
+		// 		</span>
+		// 	);
+		// }
 
 		return (
 			<div className='todo-app container'>
@@ -77,10 +68,11 @@ class Todo extends Component {
 					addTodo={this.addTodo}
 					submit={this.handleSubmit}
 					change={this.handleChange}
+					validation={validation ? 'error' : null}
 					value={this.state.content}
 				/>
 
-				{checkValidationInput}
+				{/* {checkValidationInput} */}
 			</div>
 		);
 	}
