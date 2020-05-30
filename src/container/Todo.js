@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 
-import TodoApp from '../components/TodoApp';
+import TodoApp from '../components/TodoApp/TodoApp';
 import Input from '../components/UI/Input/Input';
+
+import { StyledTodo, StyledTodoContainer, StyledH1 } from './Todo.styles';
 
 class Todo extends Component {
 	state = {
 		todos: [],
 		content: '',
-		validation: false,
+		isValid: false,
 	};
 
 	removeTodo = (id) => {
@@ -37,43 +39,33 @@ class Todo extends Component {
 
 		const checkValidation = this.state.content;
 		if (checkValidation === '') {
-			this.setState({ validation: true });
+			this.setState({ isValid: true });
 			return;
 		}
 		this.addTodo(this.state.content);
 		this.setState({
 			content: '',
-			validation: false,
+			isValid: false,
 		});
 	};
 
 	render() {
-		let { validation } = this.state;
-
-		// let checkValidationInput = null;
-
-		// if (validation) {
-		// 	checkValidationInput = (
-		// 		<span className='error'>
-		// 			{validation ? <p>Please enter your todo</p> : null}
-		// 		</span>
-		// 	);
-		// }
+		let { isValid } = this.state;
 
 		return (
-			<div className='todo-app container'>
-				<h1 className='center blue-text'>Todo's</h1>
+			<StyledTodo>
+				<StyledH1>Todos</StyledH1>
+				<StyledTodoContainer>
+					<Input
+						addTodo={this.addTodo}
+						submit={this.handleSubmit}
+						change={this.handleChange}
+						isValid={isValid ? 'error' : null}
+						value={this.state.content}
+					/>
+				</StyledTodoContainer>
 				<TodoApp todos={this.state.todos} removeTodo={this.removeTodo} />
-				<Input
-					addTodo={this.addTodo}
-					submit={this.handleSubmit}
-					change={this.handleChange}
-					validation={validation ? 'error' : null}
-					value={this.state.content}
-				/>
-
-				{/* {checkValidationInput} */}
-			</div>
+			</StyledTodo>
 		);
 	}
 }

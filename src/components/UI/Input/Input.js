@@ -1,16 +1,19 @@
 import React from 'react';
 
-import './Input.css';
-import { StyledInputValidation } from './Input.styles';
-import { StyledSpanCheckValidation } from './Input.styles';
+import PropTypes from 'prop-types';
 
-const input = ({ change, submit, value, validation }) => {
+import {
+	StyledInputValidation,
+	StyledSpanCheckValidation,
+} from './Input.styles';
+
+const Input = ({ change, submit, value, isValid }) => {
 	let checkValidationInput = null;
 
-	if (validation) {
+	if (isValid) {
 		checkValidationInput = (
 			<StyledSpanCheckValidation className='error'>
-				{validation ? <p>Please enter your todo</p> : null}
+				{isValid ? <p className='errorMS'>Please enter your todo</p> : null}
 			</StyledSpanCheckValidation>
 		);
 	}
@@ -21,14 +24,20 @@ const input = ({ change, submit, value, validation }) => {
 					type='text'
 					onChange={change}
 					value={value}
-					className={validation}
+					className={isValid}
+					placeholder='What needs to be done?'
+					aria-describedby='addTODO'
 					required
 				/>
-				<button type='submit'>Add</button>
+				{/* <StyledButton type='submit'>Add</StyledButton> */}
 			</form>
 			{checkValidationInput}
 		</>
 	);
 };
 
-export default input;
+Input.prototype = {
+	onSubmit: PropTypes.func.required,
+};
+
+export default Input;

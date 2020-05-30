@@ -1,13 +1,14 @@
 import React from 'react';
 
 import Todo from './container/Todo';
+import Layout from './components/Layout/Layout';
 
 import './App.css';
 
 const App = () => (
-	<div className='App'>
+	<Layout>
 		<Todo />
-	</div>
+	</Layout>
 );
 
 export default App;

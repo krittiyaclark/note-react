@@ -1,24 +1,26 @@
 import React from 'react';
 
-const Todos = ({ todos, removeTodo }) => {
+import { StyledTodoList, StyledTodoListContainer } from './TodoApp.styles';
+
+const todoApp = ({ todos, removeTodo }) => {
 	const todoList = todos.length ? (
 		todos.map((todo) => {
 			return (
-				<div className='collection-item' key={todo.id}>
-					<span
+				<StyledTodoListContainer key={todo.id}>
+					<StyledTodoList
 						onClick={() => {
 							removeTodo(todo.id);
 						}}>
 						{todo.content}
-					</span>
-				</div>
+					</StyledTodoList>
+				</StyledTodoListContainer>
 			);
 		})
 	) : (
-		<p className='center'>You have no todo!</p>
+		<p>You have no todo!</p>
 	);
 
-	return <div className='todos collection'>{todoList}</div>;
+	return <StyledTodoListContainer>{todoList}</StyledTodoListContainer>;
 };
 
-export default Todos;
+export default todoApp;
