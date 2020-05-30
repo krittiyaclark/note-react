@@ -1,13 +1,14 @@
 import React from 'react';
+// import { Route } from 'react-router-dom';
 
-import Todo from './container/Todo';
+import Notes from './container/CreateNotes/CreateNotes';
 import Layout from './components/Layout/Layout';
 
 import './App.css';
 
 const App = () => (
 	<Layout>
-		<Todo />
+		<Notes />
 	</Layout>
 );
 

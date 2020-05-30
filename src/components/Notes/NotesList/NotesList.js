@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { StyledTodoList, StyledTodoListContainer } from './TodoApp.styles';
+import { StyledTodoList, StyledTodoListContainer } from './NotesList.styles';
 
-const todoApp = ({ todos, removeTodo }) => {
+const notesList = ({ todos, removeTodo }) => {
 	const todoList = todos.length ? (
 		todos.map((todo) => {
 			return (
@@ -23,4 +23,4 @@ const todoApp = ({ todos, removeTodo }) => {
 	return <StyledTodoListContainer>{todoList}</StyledTodoListContainer>;
 };
 
-export default todoApp;
+export default notesList;

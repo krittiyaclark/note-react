@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 
-import TodoApp from '../components/TodoApp/TodoApp';
-import Input from '../components/UI/Input/Input';
+import NotesList from '../../components/Notes/NotesList/NotesList';
+import Input from '../../components/UI/Input/Input';
 
-import { StyledTodo, StyledTodoContainer, StyledH1 } from './Todo.styles';
+import {
+	StyledTodo,
+	StyledTodoContainer,
+	StyledH1,
+} from './CreateNotes.styles.js';
 
 class Todo extends Component {
 	state = {
@@ -50,11 +54,14 @@ class Todo extends Component {
 	};
 
 	render() {
-		let { isValid } = this.state;
+		const { isValid } = this.state;
+		const { todos } = this.state;
+		let totalTodos = todos.length;
 
 		return (
 			<StyledTodo>
-				<StyledH1>Todos</StyledH1>
+				<StyledH1>Notes</StyledH1>
+				<h2>Note: {totalTodos}</h2>
 				<StyledTodoContainer>
 					<Input
 						addTodo={this.addTodo}
@@ -64,7 +71,7 @@ class Todo extends Component {
 						value={this.state.content}
 					/>
 				</StyledTodoContainer>
-				<TodoApp todos={this.state.todos} removeTodo={this.removeTodo} />
+				<NotesList todos={this.state.todos} removeTodo={this.removeTodo} />
 			</StyledTodo>
 		);
 	}
